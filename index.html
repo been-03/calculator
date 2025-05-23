@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <style>
+        .none-calc {
+            display: none;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 360px) {
+
+            .big-calc,
+            .small-calc {
+                display: none !important;
+            }
+
+            .none-calc {
+                display: block;
+            }
+        }
+
+        @media (max-width:540px) {
+            .big-calc {
+                display: none;
+            }
+
+            body {
+                margin-top: 50px;
+                font-family: sans-serif;
+            }
+
+            .small-calc {
+                background-color: rgb(236, 235, 235);
+                min-width: 400px;
+                width: 400px;
+                border: 2px solid black;
+                padding: 20px 30px 0 30px;
+                border-radius: 10px;
+                box-sizing: border-box;
+            }
+
+            #display1 {
+                height: 50px;
+                background-color: #ffffff;
+                text-align: right;
+                font-size: 30px;
+                padding-right: 10px;
+                padding-top: 5px;
+                margin-bottom: 10px;
+                border: 2px solid black;
+            }
+
+            .small-calc .button-row {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .small-calc .button {
+                flex: 1;
+                height: 60px;
+                margin: 0 3px 0 2px;
+                font-size: 25px;
+                border: 1px solid black;
+                cursor: pointer;
+            }
+
+            .small-calc .button:hover {
+                background-color: white;
+            }
+
+            .small-calc .operator {
+                background-color: rgb(255, 202, 67);
+                color: black;
+                font-weight: bold;
+            }
+
+            .small-calc .gray {
+                background-color: #ccc;
+            }
+
+            .small-calc .BottomLine {
+                display: flex;
+                justify-content: center;
+                text-decoration: underline;
+                font-weight: bold;
+                color: blue;
+            }
+
+            .small-calc .StudentId {
+                display: flex;
+                justify-content: right;
+                font-weight: bold
+            }
+
+            .small-clac .explain {
+                display: block;
+                justify-content: center;
+                font-family: sans-serif;
+            }
+        }
+
+        @media (min-width: 541px) {
+
+            .small-calc {
+                display: none;
+            }
+
+            body {
+                margin-top: 50px;
+                font-family: sans-serif;
+            }
+
+            .big-calc {
+                background-color: rgb(236, 235, 235);
+                width: 500px;
+                border: 2px solid black;
+                padding: 20px 30px 0 30px;
+                border-radius: 10px;
+            }
+
+            #display2 {
+                height: 50px;
+                background-color: #ffffff;
+                text-align: right;
+                font-size: 30px;
+                padding-right: 10px;
+                padding-top: 10px;
+                margin-bottom: 10px;
+                border: 2px solid black;
+            }
+
+            .big-calc .button-row {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .big-calc .button {
+                flex: 1;
+                height: 50px;
+                margin: 2px;
+                font-size: 25px;
+                border: 1px solid black;
+                cursor: pointer;
+            }
+
+            .big-calc .button:hover {
+                background-color: white;
+            }
+
+            .big-calc .operator {
+                background-color: rgb(255, 202, 67);
+                color: black;
+                font-weight: bold;
+            }
+
+            .big-calc .gray {
+                background-color: #ccc;
+            }
+
+            .big-calc .BottomLine {
+                display: flex;
+                justify-content: right;
+                padding-right: 50px;
+                text-decoration: underline;
+                font-weight: bold;
+                color: blue;
+            }
+
+            .big-calc .StudentId {
+                display: flex;
+                justify-content: right;
+                font-weight: bold;
+            }
+
+            .big-clac .explain {
+                display: block;
+                justify-content: center;
+                font-family: sans-serif;
+            }
+        }
+    </style>>
+</head>
+
+<body>
+    <h3 class="none-calc">표시할 수 없음.</h3>
+    <!-- 중간 화면에서 계산기 -->
+    <div class="small-calc">
+        <div id="display1">0</div>
+        <div class="button-row">
+            <button class="button gray" onclick="getRndInteger()">Rnd</button>
+            <button class="button gray" onclick="factorial()">!</button>
+            <button class="button gray" onclick="logButton()">log</button>
+            <button class="button gray" onclick="reciprocalButton()">1/x</button>
+        </div>
+        <div class="button-row">
+            <button class="button gray" onclick="allClear()">AC</button>
+            <button class="button gray" onclick="squareRootButton()">√x</button>
+            <button class="button gray" onclick="percentageButton()">%</button>
+            <button class="button operator" onclick="divideButton()">÷</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="numberButton(7)">7</button>
+            <button class="button" onclick="numberButton(8)">8</button>
+            <button class="button" onclick="numberButton(9)">9</button>
+            <button class="button operator" onclick="multiplyButton()">×</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="numberButton(4)">4</button>
+            <button class="button" onclick="numberButton(5)">5</button>
+            <button class="button" onclick="numberButton(6)">6</button>
+            <button class="button operator" onclick="minusButton()">−</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="numberButton(1)">1</button>
+            <button class="button" onclick="numberButton(2)">2</button>
+            <button class="button" onclick="numberButton(3)">3</button>
+            <button class="button operator" onclick="plusButton()">+</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="numberButton(0)">0</button>
+            <button class="button" onclick="dotButton()">.</button>
+            <button class="button" onclick="toggleButton()">+/-</button>
+            <button class="button operator" onclick="equalButton()">=</button>
+        </div>
+        <div class="button-row">
+            <button class="button gray" onclick="piButton()">π</button>
+            <button class="button gray" onclick="powerButton()">xʸ</button>
+            <button class="button gray" onclick="roundTo2Button()">R2</button>
+            <button class="button gray" onclick="roundTo0Button()">R0</button>
+        </div>
+        <div>
+            <p class="BottomLine">Get a Widget for this Calculator</p>
+        </div>
+        <div>
+            <p class="StudentId">©20222704 남규빈</p>
+        </div>
+    </div>
+
+    <!-- 큰 화면에서 계산기  -->
+    <div class="big-calc">
+        <div id="display2">0</div>
+        <div class="button-row">
+            <button class="button gray" onclick="getRndInteger()">Rnd</button>
+            <button class="button gray" onclick="factorial()">!</button>
+            <button class="button" onclick="numberButton(7)">7</button>
+            <button class="button" onclick="numberButton(8)">8</button>
+            <button class="button" onclick="numberButton(9)">9</button>
+            <button class="button operator" onclick="divideButton()">÷</button>
+            <button class="button gray" onclick="roundTo2Button()">R2</button>
+        </div>
+        <div class="button-row">
+            <button class="button gray" onclick="logButton()">log</button>
+            <button class="button gray" onclick="reciprocalButton()">1/x</button>
+            <button class="button" onclick="numberButton(4)">4</button>
+            <button class="button" onclick="numberButton(5)">5</button>
+            <button class="button" onclick="numberButton(6)">6</button>
+            <button class="button operator" onclick="multiplyButton()">×</button>
+            <button class="button gray" onclick="roundTo0Button()">R0</button>
+        </div>
+        <div class="button-row">
+            <button class="button gray" onclick="piButton()">π</button>
+            <button class="button gray" onclick="powerButton()">xʸ</button>
+            <button class="button" onclick="numberButton(1)">1</button>
+            <button class="button" onclick="numberButton(2)">2</button>
+            <button class="button" onclick="numberButton(3)">3</button>
+            <button class="button operator" onclick="minusButton()">−</button>
+            <button class="button gray" onclick="allClear()">AC</button>
+        </div>
+        <div class="button-row">
+            <button class="button gray" onclick="squareRootButton()">√x</button>
+            <button class="button gray" onclick="percentageButton()">%</button>
+            <button class="button" onclick="numberButton(0)">0</button>
+            <button class="button" onclick="dotButton()">.</button>
+            <button class="button" onclick="toggleButton()">+/-</button>
+            <button class="button operator" onclick="plusButton()">+</button>
+            <button class="button operator" onclick="equalButton()">=</button>
+        </div>
+        <div>
+            <p class="BottomLine">Get a Widget for this Calculator</p>
+        </div>
+        <div>
+            <p class="StudentId">©20222704 남규빈</p>
+        </div>
+    </div>
+    <script>
+        // 숫자버튼 구현
+        function numberButton(num) {
+            if (document.getElementById("display1").innerHTML == '0') {
+                document.getElementById("display1").innerHTML = num;
+            } else {
+                document.getElementById("display1").innerHTML += num;
+            }
+            if (document.getElementById("display2").innerHTML == '0') {
+                document.getElementById("display2").innerHTML = num;
+            } else {
+                document.getElementById("display2").innerHTML += num;
+            }
+        }
+
+        // 연산자 버튼 구현에 필요한 변수 선언 
+        let curValue = 0;  // 현재 값
+        let operator = ''; // 연산자
+
+        // 더하기 연산자 버튼 구현
+        function plusButton() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML);
+            document.getElementById("display1").innerHTML = 0;
+            document.getElementById("display2").innerHTML = 0;
+            operator = '+';
+        }
+
+        // 뺄셈 연산자 버튼 구현
+        function minusButton() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML);
+            document.getElementById("display1").innerHTML = 0;
+            document.getElementById("display2").innerHTML = 0;
+            operator = '-';
+        }
+
+        // 곱셈 연산자 버튼 구현
+        function multiplyButton() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML);
+            document.getElementById("display1").innerHTML = 0;
+            document.getElementById("display2").innerHTML = 0;
+            operator = '*';
+        }
+
+        // 나눗셈 연산 버튼
+        function divideButton() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML);
+            document.getElementById("display1").innerHTML = 0;
+            document.getElementById("display2").innerHTML = 0;
+            operator = '/';
+        }
+
+        // = 연산자 버튼 구현
+        function equalButton() {
+            let display1 = parseFloat(document.getElementById('display1').innerHTML);
+            if (operator == '+') {
+                curValue += display1;
+            } else if (operator == '-') {
+                curValue -= display1;
+            } else if (operator == '*') {
+                curValue *= display1;
+            } else if (operator == '/') {
+                curValue /= display1;
+            } else if (operator == '^') {
+                curValue = Math.pow(curValue, display1);
+            } else if (operator == '!') {
+                let result = 1;
+                for (let i = 1; i < curValue + 1; i++) {
+                    result *= i;
+                }
+                curValue = result;
+            }
+
+            // 결과 처리
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        // 부호 변환 버튼
+        function toggleButton() {
+            let displayValue = parseFloat(document.getElementById("display1").innerHTML);
+
+            if (displayValue !== 0) {
+                displayValue = -displayValue;
+                document.getElementById('display1').innerHTML = displayValue;
+                document.getElementById('display2').innerHTML = displayValue;
+            }
+        }
+
+
+        // . 버튼
+        function dotButton() {
+            curValue = document.getElementById("display1").innerHTML;
+
+            if (!curValue.includes(".")) {
+                document.getElementById('display1').innerHTML = curValue + '.';
+                document.getElementById('display2').innerHTML = curValue + '.';
+            }
+        }
+
+        // AC 버튼
+        function allClear() {
+            document.getElementById("display1").innerHTML = '0';
+            document.getElementById("display2").innerHTML = '0';
+            curValue = 0;
+            operator = '';
+        }
+
+        // √x 제곱근 버튼
+        function squareRootButton() {
+            curValue = Math.sqrt(parseFloat(document.getElementById("display1").innerHTML));
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        // % 백분율 버튼
+        function percentageButton() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML) / 100;
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        // π 파이 버튼
+        function piButton() {
+            curValue = Math.PI;
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        // xʸ 지수 버튼
+        function powerButton() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML);
+            document.getElementById('display1').innerHTML = 0;
+            document.getElementById('display2').innerHTML = 0;
+            operator = '^';
+        }
+
+        // R2 소수점 2자리 반올림 버튼
+        function roundTo2Button() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML).toFixed(2);
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        // R0 소수점 0자리 반올림 버튼
+        function roundTo0Button() {
+            curValue = Math.round(parseFloat(document.getElementById("display1").innerHTML));
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        //랜덤 정수 버튼튼
+        function getRndInteger() {
+            curValue = Math.floor(Math.random() * 1000) + 1;
+            document.getElementById('display1').innerHTML = curValue;
+            document.getElementById('display2').innerHTML = curValue;
+        }
+
+        //팩토리얼 버튼튼
+        function factorial() {
+            curValue = parseFloat(document.getElementById("display1").innerHTML);
+            document.getElementById("display1").innerHTML = curValue + '!';
+            document.getElementById("display2").innerHTML = curValue + '!';
+            operator = '!';
+        }
+
+        //역수 버튼튼
+        function reciprocalButton() {
+            let value = parseFloat(document.getElementById("display1").innerHTML);
+
+            curValue = 1 / value;
+            document.getElementById("display1").innerHTML = curValue;
+            document.getElementById("display2").innerHTML = curValue;
+        }
+
+        //로그버튼
+        function logButton() {
+            let value = parseFloat(document.getElementById("display1").innerHTML);
+
+            curValue = Math.log10(value);
+            document.getElementById("display1").innerHTML = curValue;
+            document.getElementById("display2").innerHTML = curValue;
+        }
+
+
+    </script>
+    <br><br>
+    <hr>
+    </hr>
+    <div class="explain">
+        <h3>설명</h3>
+        <p>Rnd : 1~1000까지의 정수를 랜덤으로 표시한다.</p>
+        <p>! : 현재 입력된 숫자의 팩토리얼 값을 계산합니다. (0 이상의 정수만 가능) </p>
+        <p>1/x : 현재 값의 역수를 계산합니다. (1이상의 수부터 가능)</p>
+        <p>log : 현재 값의 상용로그(log₁₀)를 계산합니다.(1이상의 수부터 가능)</p>
+    </div>
+</body>
+
+</html>
